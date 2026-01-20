@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, ScrollView 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, SIZES } from '../../constants/theme';
 import { Ionicons } from '@expo/vector-icons';
+import Logo from '../../components/Logo';
 
 const LoginScreen = ({ onLogin }) => {
     const [screen, setScreen] = useState('roles'); // roles | rescue_login | admin_login | rescue_signup | admin_signup
@@ -78,11 +79,7 @@ const LoginScreen = ({ onLogin }) => {
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollContent}>
-                    <View style={styles.logoContainer}>
-                        <Ionicons name="shield-checkmark" size={80} color={COLORS.primary} />
-                        <Text style={styles.title}>DisasterGuard</Text>
-                        <Text style={styles.subtitle}>Unified Disaster Management</Text>
-                    </View>
+                    <Logo size="large" showText={true} />
 
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Select Your Role</Text>
@@ -132,11 +129,7 @@ const LoginScreen = ({ onLogin }) => {
                         <Text style={styles.backText}>Back</Text>
                     </TouchableOpacity>
 
-                    <View style={styles.logoContainer}>
-                        <Ionicons name="medkit" size={60} color={COLORS.safety} />
-                        <Text style={styles.title}>Rescue Team</Text>
-                        <Text style={styles.subtitle}>Emergency Response Portal</Text>
-                    </View>
+                    <Logo size="medium" showText={true} />
 
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Login to Your Account</Text>
@@ -207,11 +200,7 @@ const LoginScreen = ({ onLogin }) => {
                         <Text style={styles.backText}>Back</Text>
                     </TouchableOpacity>
 
-                    <View style={styles.logoContainer}>
-                        <Ionicons name="settings" size={60} color={COLORS.secondary} />
-                        <Text style={styles.title}>Administrator</Text>
-                        <Text style={styles.subtitle}>Admin Control Panel</Text>
-                    </View>
+                    <Logo size="medium" showText={true} />
 
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Login to Your Account</Text>
@@ -282,11 +271,7 @@ const LoginScreen = ({ onLogin }) => {
                         <Text style={styles.backText}>Back</Text>
                     </TouchableOpacity>
 
-                    <View style={styles.logoContainer}>
-                        <Ionicons name="medkit" size={60} color={COLORS.safety} />
-                        <Text style={styles.title}>Create Account</Text>
-                        <Text style={styles.subtitle}>Rescue Team Registration</Text>
-                    </View>
+                    <Logo size="medium" showText={true} />
 
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Sign Up New Account</Text>
@@ -370,11 +355,7 @@ const LoginScreen = ({ onLogin }) => {
                         <Text style={styles.backText}>Back</Text>
                     </TouchableOpacity>
 
-                    <View style={styles.logoContainer}>
-                        <Ionicons name="settings" size={60} color={COLORS.secondary} />
-                        <Text style={styles.title}>Create Account</Text>
-                        <Text style={styles.subtitle}>Admin Registration</Text>
-                    </View>
+                    <Logo size="medium" showText={true} />
 
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Sign Up New Account</Text>

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "DisasterApp",
+    "name": "DisasterGuard",
     "slug": "DisasterApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,26 +10,36 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1A5F7A"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.drsusan.DisasterApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1A5F7A"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.drsusan.DisasterApp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundleUrl": "https://expo.dev/@disasterapp/disasterguard"
     },
     "extra": {
       "eas": {
         "projectId": "e761dc59-f3d5-4fba-9d28-9d1cd3983832"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow DisasterGuard to access your location when in use."
+        }
+      ]
+    ]
   }
 }
