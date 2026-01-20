@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome - Web",
+            "url": "http://localhost:19006",
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "expo-start-web"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Start Backend Server",
+            "program": "${workspaceFolder}/backend/server.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/backend"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Run Full App (Frontend + Backend)",
+            "configurations": ["Start Backend Server"],
+            "preLaunchTask": "expo-start-web",
+            "stopAll": true
+        }
+    ]
+}

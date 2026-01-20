@@ -1,50 +1,6 @@
 {
     "reports": [
-        {
-            "type": "Fire",
-            "description": "",
-            "location": "28.4262, 70.2841",
-            "image": "blob:http://localhost:8081/b97877dd-c057-46af-bd27-0cf48c94b099",
-            "status": "Rejected",
-            "id": "1767996290894",
-            "time": "3:04:50 am"
-        },
-        {
-            "type": "Accident",
-            "description": "test1",
-            "location": "31.5064, 74.3244",
-            "image": "blob:http://localhost:8088/b4aa17df-24bc-4f6f-a780-ca3851db3de4",
-            "status": "Rejected",
-            "id": "1767625061266",
-            "time": "7:57:41 pm"
-        },
-        {
-            "type": "Flood",
-            "description": "test",
-            "location": "Unknown Location",
-            "image": null,
-            "status": "Rejected",
-            "id": "1767624625399",
-            "time": "7:50:25 pm"
-        },
-        {
-            "id": "101",
-            "type": "Fire",
-            "location": "Mock: Sector F-6",
-            "status": "Rejected",
-            "description": "Fire reported near market",
-            "time": "Just now",
-            "severity": "Medium"
-        },
-        {
-            "id": "102",
-            "type": "Flood",
-            "location": "Mock: Rawal Lake",
-            "status": "Approved",
-            "description": "Water levels rising",
-            "time": "10 mins ago",
-            "severity": "High"
-        }
+        
     ],
     "contacts": [
         {
@@ -81,6 +37,39 @@
             "relation": "friend",
             "id": "1767624556615",
             "isEmergency": false
+        },
+        {
+            "name": "Bhai Ali",
+            "phone": "03077585116",
+            "relation": "Brother",
+            "id": "1768585408320",
+            "isEmergency": false
+        }
+    ],
+    "users": [
+        {
+            "id": "1",
+            "name": "Public User",
+            "email": "user@gmail.com",
+            "password": "password123",
+            "role": "public",
+            "createdAt": "2026-01-20T20:37:00.888Z"
+        },
+        {
+            "id": "2",
+            "name": "Rescue Team",
+            "email": "rescue@gmail.com",
+            "password": "password123",
+            "role": "rescue",
+            "createdAt": "2026-01-20T20:37:00.888Z"
+        },
+        {
+            "id": "3",
+            "name": "Admin",
+            "email": "admin@gmail.com",
+            "password": "password123",
+            "role": "admin",
+            "createdAt": "2026-01-20T20:37:00.888Z"
         }
     ]
 }

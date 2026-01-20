@@ -11,23 +11,50 @@ const MOCK_ALERTS = [
 ];
 
 const AlertCard = ({ item }) => {
+    // Map report type to icon
+    const getIcon = (type) => {
+        switch (type?.toLowerCase()) {
+            case 'fire': return 'flame';
+            case 'flood': return 'water';
+            case 'earthquake': return 'earth';
+            case 'accident': return 'medical';
+            default: return 'alert-circle';
+        }
+    };
+
+    // Map severity to color
+    const getSeverityColor = (severity) => {
+        switch (severity?.toLowerCase()) {
+            case 'critical': return COLORS.danger;
+            case 'high': return '#FF7043';
+            case 'medium': return COLORS.warning;
+            case 'low': return COLORS.safety;
+            default: return COLORS.primary;
+        }
+    };
+
     return (
-        <View style={styles.card}>
+        <View style={[styles.card, { borderLeftColor: getSeverityColor(item.severity) }]}>
             <View style={styles.cardHeader}>
                 <Ionicons
-                    name="warning"
+                    name={getIcon(item.type)}
                     size={24}
-                    color={item.severity === 'high' ? COLORS.danger : (item.severity === 'medium' ? COLORS.warning : COLORS.safety)}
+                    color={getSeverityColor(item.severity)}
                 />
-                <Text style={styles.cardTitle}>{item.title}</Text>
-                <Text style={styles.cardTime}>{item.time}</Text>
+                <View style={{ flex: 1, marginLeft: 12 }}>
+                    <Text style={styles.cardTitle}>{item.type} Alert</Text>
+                    <Text style={styles.cardTime}>{item.time}</Text>
+                </View>
+                <View style={[styles.severityBadge, { backgroundColor: getSeverityColor(item.severity) }]}>
+                    <Text style={styles.severityText}>{item.severity}</Text>
+                </View>
             </View>
             <Text style={styles.cardLocation}>📍 {item.location}</Text>
-            <Text style={styles.cardDesc}>{item.desc}</Text>
+            <Text style={styles.cardDesc}>{item.description}</Text>
 
             <TouchableOpacity
                 style={styles.shareButton}
-                onPress={() => Share.share({ message: `⚠️ DISASTER ALERT: ${item.title} at ${item.location}. ${item.desc}` })}
+                onPress={() => Share.share({ message: `⚠️ DISASTER ALERT: ${item.type} at ${item.location}. ${item.description}` })}
             >
                 <Ionicons name="share-social" size={16} color={COLORS.white} />
                 <Text style={styles.shareText}>Share Alert</Text>
@@ -58,10 +85,20 @@ const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: COLORS.background },
     header: { fontSize: SIZES.h1, fontWeight: 'bold', padding: SIZES.padding, color: COLORS.text, backgroundColor: COLORS.white },
     list: { padding: SIZES.padding },
-    card: { backgroundColor: COLORS.white, borderRadius: SIZES.radius, padding: SIZES.padding, marginBottom: 16, elevation: 3 },
+    card: { 
+        backgroundColor: COLORS.white, 
+        borderRadius: SIZES.radius, 
+        padding: SIZES.padding, 
+        marginBottom: 16, 
+        elevation: 3,
+        borderLeftWidth: 4,
+        borderLeftColor: COLORS.primary
+    },
     cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
-    cardTitle: { fontSize: SIZES.h3, fontWeight: 'bold', flex: 1, marginLeft: 8 },
+    cardTitle: { fontSize: SIZES.h3, fontWeight: 'bold', flex: 1 },
     cardTime: { fontSize: 12, color: COLORS.gray },
+    severityBadge: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6 },
+    severityText: { color: COLORS.white, fontSize: 10, fontWeight: 'bold' },
     cardLocation: { color: COLORS.secondary, marginBottom: 8, fontWeight: '600' },
     cardDesc: { color: COLORS.gray, marginBottom: 12 },
     shareButton: {

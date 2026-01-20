@@ -57,6 +57,9 @@ app.get('/api/reports', (req, res) => {
 
 // Submit a report
 app.post('/api/reports', (req, res) => {
+    console.log('📨 POST /api/reports called');
+    console.log('Request body:', JSON.stringify(req.body));
+    
     const data = readData();
     const newReport = {
         ...req.body,
@@ -64,26 +67,63 @@ app.post('/api/reports', (req, res) => {
         status: 'Pending',
         time: new Date().toLocaleTimeString()
     };
+    
+    // Log emergency SOS reports
+    if (req.body.isEmergencySOS) {
+        console.log('🚨🚨🚨 EMERGENCY SOS REPORT RECEIVED 🚨🚨🚨');
+        console.log('Location:', newReport.location);
+        console.log('Description:', newReport.description);
+        console.log('Time:', newReport.time);
+        console.log('Report ID:', newReport.id);
+    }
+    
     data.reports.unshift(newReport); // Add to beginning
     writeData(data);
+    console.log('✅ Report saved. Total reports:', data.reports.length);
     res.status(201).json(newReport);
 });
 
-// Update report status (Approve/Reject)
+// Update report status (Approve/Reject/Mission Status)
 app.patch('/api/reports/:id', (req, res) => {
     const { id } = req.params;
-    const { status, severity } = req.body;
+    const { status, severity, rejectionReason, approvedAt, rejectedAt, missionStatus, acceptedAt, completedAt } = req.body;
     const data = readData();
 
     let reportFound = false;
+
     data.reports = data.reports.map(report => {
         if (report.id === id) {
             reportFound = true;
-            return {
+            const updatedReport = {
                 ...report,
-                status: status || report.status,
-                severity: severity || report.severity
+                status: status ?? report.status,
+                missionStatus: missionStatus ?? report.missionStatus
             };
+            
+            // Add severity if approving
+            if (status === 'Approved') {
+                updatedReport.severity = severity ?? 'High';
+                updatedReport.approvedAt = approvedAt ?? new Date().toISOString();
+            }
+            
+            // Add rejection reason if rejecting
+            if (status === 'Rejected') {
+                updatedReport.rejectionReason = rejectionReason ?? 'No reason provided';
+                updatedReport.rejectedAt = rejectedAt ?? new Date().toISOString();
+            }
+
+            // Handle mission status updates
+            if (missionStatus === 'Active') {
+                updatedReport.missionStatus = 'Active';
+                updatedReport.acceptedAt = acceptedAt ?? new Date().toISOString();
+            }
+
+            if (missionStatus === 'Completed') {
+                updatedReport.missionStatus = 'Completed';
+                updatedReport.completedAt = completedAt ?? new Date().toISOString();
+            }
+            
+            return updatedReport;
         }
         return report;
     });
@@ -93,7 +133,8 @@ app.patch('/api/reports/:id', (req, res) => {
     }
 
     writeData(data);
-    res.json({ message: 'Report updated', id, status });
+    const updated = data.reports.find(r => r.id === id);
+    res.json({ message: 'Report updated', report: updated });
 });
 
 // --- CONTACTS API ---
